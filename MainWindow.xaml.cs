@@ -21,35 +21,40 @@ using System.Windows.Shapes;
 
 namespace URodziny
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
+        //Creating DataSet witch will contain data from excel as data set
         DataSet dataa;
+
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
+        //Add functionality on click to Close Button
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            //Close App
             System.Windows.Application.Current.Shutdown();
         }
 
+        //Add functionality on click to Minimalize Button
         private void Minimalize_Click(object sender, RoutedEventArgs e)
         {
+            //Minimalize app
             wind.WindowState = WindowState.Minimized;
         }
 
-
+        //Add functionality on click to Browse Button
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
+            //Create new dialog window for user to search excel file with *.xlsx and *.xls extencions
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.FileName = "Excel document";
             dialog.DefaultExt = ".xlsx";
-            dialog.Filter = "Text documents (.xlsx)|*.xlsx;*.xls";
+            dialog.Filter = "Excel documents (.xlsx)|*.xlsx;*.xls";
             bool? result = dialog.ShowDialog();
             if (result == true)
             {
@@ -59,6 +64,7 @@ namespace URodziny
                 {
                     using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
+                        //DataSet that was created at the beginning of program now has value
                         dataa = reader.AsDataSet();
                     }
                 }
@@ -67,9 +73,10 @@ namespace URodziny
 
 
 
-
+        //Add functionality on click to Chcek Button 
         private void Check_btn_Click(object sender, RoutedEventArgs e)
         {
+            //Getting data from fields witch user filled
             var startDate = StartDate.Text;
             var endDate = EndDate.Text;
             var numerArkusza = NumerArkusza.Text;
@@ -78,11 +85,15 @@ namespace URodziny
             var fileName = fileNameText.Text;
             var NumerOfColumns = 0;
             var NumbersOfTables = 0;
-            if (StartDate.SelectedDate == null | EndDate.SelectedDate == null | NumerKol.Text == "" | fileNameText.Text=="..." | NumerArkusza.Text==""){
+
+            //Checking if user filled all fields
+            if (StartDate.SelectedDate == null | EndDate.SelectedDate == null | NumerKol.Text == "" | fileNameText.Text == "..." | NumerArkusza.Text == "")
+            {
                 ErrorMessage_text.Text = "Fill all gaps";
             }
             else
             {
+                //Checking if user gave us correct sheet number 
                 var numerArkuszaInt = 0;
                 try { numerArkuszaInt = Int32.Parse(numerArkusza); } catch { }
                 foreach (var arkusz in dataa.Tables)
@@ -95,18 +106,21 @@ namespace URodziny
                 }
                 else
                 {
-                    foreach (DataColumn column in dataa.Tables[numerArkuszaInt-1].Columns)
+
+                    //Checking if user gave us correct column number
+                    foreach (DataColumn column in dataa.Tables[numerArkuszaInt - 1].Columns)
                     {
                         NumerOfColumns++;
                     }
                     var numerKolumnyInt = 1;
                     try { numerKolumnyInt = Int32.Parse(numerKolumny); } catch { }
-                    if (numerKolumnyInt<=0 | numerKolumnyInt > NumerOfColumns)
+                    if (numerKolumnyInt <= 0 | numerKolumnyInt > NumerOfColumns)
                     {
                         ErrorMessage_text.Text = "That column does not exist";
                     }
                     else
                     {
+                        //Checking if date of birth is during the trip
                         ErrorMessage_text.Text = "";
                         using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
                         {
@@ -120,6 +134,7 @@ namespace URodziny
                                 var Year = startDateTime.Year + z;
                                 while (z >= 0)
                                 {
+                                    //If table contains column names we are skipping first row
                                     bool i;
                                     if ((bool)czyNaglowki)
                                     {
@@ -130,7 +145,7 @@ namespace URodziny
                                         i = false;
                                     }
 
-                                    foreach (DataRow row in data.Tables[numerArkuszaInt-1].Rows)
+                                    foreach (DataRow row in data.Tables[numerArkuszaInt - 1].Rows)
                                     {
                                         if (!i)
                                         {
@@ -142,6 +157,8 @@ namespace URodziny
 
                                                 if (DataUrodze.Ticks <= endDateTime.Ticks & DataUrodze.Ticks >= startDateTime.Ticks)
                                                 {
+
+                                                    //If tour participant has birthday on the trip we are creating new Object of Persons typ with his data. And we are adding this new object to list 
                                                     arrayOfBirtyday.Add(new Persons(row[0].ToString(), row[1].ToString(), dataUrodzenia, startDateTime, Year));
                                                 }
                                             }
@@ -156,26 +173,28 @@ namespace URodziny
                                     Year--;
                                     z--;
                                 }
+                                //Sorting of this list
                                 urodziny_text.Text = "";
                                 List<Persons> SortedList = arrayOfBirtyday.OrderBy(o => o.diference.TotalDays).ToList();
-                                if(SortedList.Count == 0)
+                                if (SortedList.Count == 0)
                                 {
                                     urodziny_text.Text += "Brak urodzin na tym wyjeździe";
                                 }
                                 else
                                 {
+                                    //Print this list
                                     foreach (Persons person in SortedList)
                                     {
                                         urodziny_text.Text += "\n" + person.print();
                                     }
                                 }
-                                
+
                             }
                         }
                     }
                 }
-                
-            }            
+
+            }
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

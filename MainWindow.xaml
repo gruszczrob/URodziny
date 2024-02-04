@@ -12,18 +12,17 @@
         AllowsTransparency="True"
         Background="Transparent"
         x:Name="wind"
-        Icon="./icon.png"
-        
-        >
+        Icon="./icon.png">
+    
     <Border CornerRadius="25" BorderBrush="Black" BorderThickness="0" Padding="0" Background="#b2d8d8">
         <Grid>
             <StackPanel>
-                
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    
                     <Border CornerRadius="25" BorderBrush="Black" BorderThickness="0" Padding="0" Background="#008080">
                         <Grid Grid.Column="0" Height="500">
                             <Grid.RowDefinitions>
@@ -36,7 +35,6 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="4*"/>
                             </Grid.RowDefinitions>
-                            
                             
                             <TextBlock Grid.Row="0" FontSize="30" FontWeight="ExtraBlack" FontFamily="Georgia" Text="URodziny App" HorizontalAlignment="Center" Foreground="White"/>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20 0 0 0" VerticalAlignment="Bottom">
@@ -65,26 +63,9 @@
                                 <Button x:Name="Check_btn" Margin="20 10 20 5" Height="25" Content="Check" Background="#004c4c" Foreground="White" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Click="Check_btn_Click"/>
                                 <TextBlock x:Name="ErrorMessage_text" Text="" FontSize="13" Foreground="Red" FontWeight="ExtraBlack" TextAlignment="Center" Width="240" TextWrapping="WrapWithOverflow"/>
                             </StackPanel>
-                            
                         </Grid>
                     </Border>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        
                     <Grid Grid.Column="1">
                         <StackPanel Margin="10" Orientation="Horizontal"  HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Button x:Name="Minimalize" Grid.Column="1" Background="Transparent" Margin="0" Height="22" Width="22" Click="Minimalize_Click"  BorderThickness="0">
@@ -108,14 +89,9 @@
                         <ScrollViewer Height="400" VerticalScrollBarVisibility="Auto">
                             <TextBlock x:Name="urodziny_text" Text="" Margin="100 0 20 20" Width="350" TextWrapping="Wrap"/>
                         </ScrollViewer>
-                        
-
                     </Grid>
-                    
                 </Grid>
-                
             </StackPanel>
-            
         </Grid>
     </Border>
 </Window>
