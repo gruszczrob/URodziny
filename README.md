@@ -12,7 +12,7 @@ Application is design using xaml. Design is simple and clear. On left baner you 
 
 ## How to install the application
 
-### Newest release - https://github.com/gruszczrob/URodziny/releases/tag/v1.0.0
+### Newest release - https://github.com/gruszczrob/URodziny/releases/tag/v1.0.1
 
 1. Unzip the entire installer folder
 2. Run the "setup.exe" program (if Windows says that the program is dangerous, click more information and then the run anyway option will appear)
