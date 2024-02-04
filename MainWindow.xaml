@@ -1,0 +1,121 @@
+﻿<Window x:Class="URodziny.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:URodziny"
+        mc:Ignorable="d"
+        Title="URodziny" Height="500" Width="800"
+        WindowStyle="None"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
+        x:Name="wind"
+        Icon="./icon.png"
+        
+        >
+    <Border CornerRadius="25" BorderBrush="Black" BorderThickness="0" Padding="0" Background="#b2d8d8">
+        <Grid>
+            <StackPanel>
+                
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                    <Border CornerRadius="25" BorderBrush="Black" BorderThickness="0" Padding="0" Background="#008080">
+                        <Grid Grid.Column="0" Height="500">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40px"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            
+                            
+                            <TextBlock Grid.Row="0" FontSize="30" FontWeight="ExtraBlack" FontFamily="Georgia" Text="URodziny App" HorizontalAlignment="Center" Foreground="White"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20 0 0 0" VerticalAlignment="Bottom">
+                                <TextBlock Text="Nazwa pliku:" HorizontalAlignment="Left" FontWeight="Bold" />
+                                <TextBlock x:Name="fileNameText" Text="..." HorizontalAlignment="Left" Width="150" TextWrapping="WrapWithOverflow" Margin="10 0 0 0"/>
+                            </StackPanel>
+                            <Button Grid.Row="2" FontWeight="Bold" x:Name="Browse" HorizontalAlignment="Left" Content="Browse" Width="150" Margin="20 5 0 10" Background="#004c4c" Foreground="White" Click="Browse_Click"/>
+                            <StackPanel Orientation="Vertical" Grid.Row="3" HorizontalAlignment="Left" >
+                                <TextBlock  FontWeight="Bold" Text="Data rozpoczęcia wyjazdu:" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                                <DatePicker  x:Name="StartDate" FontWeight="Bold" Width="150" Margin="20 5 0 0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Row="4" HorizontalAlignment="Left" >
+                                <TextBlock FontWeight="Bold" Grid.Row="5" Text="Data zakończenia wyjazdu:" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                                <DatePicker x:Name="EndDate" FontWeight="Bold" Width="150" Margin="20 5 0 0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Left" >
+                                <TextBlock FontWeight="Bold" Text="Numer arkusza w pliku excel:"  VerticalAlignment="Center" Margin="20 0 0 0" Width="150" TextWrapping="WrapWithOverflow"/>
+                                <TextBox x:Name="NumerArkusza" FontWeight="Bold" Text="" PreviewTextInput="TextBox_PreviewTextInput" VerticalAlignment="Center" Margin="20 5 0 0" Width="150" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="6" Orientation="Vertical" HorizontalAlignment="Left" >
+                                <TextBlock FontWeight="Bold" Text="Numer kolumny z datami urodzenia uczestników:"  VerticalAlignment="Center" Margin="20 0 0 0" Width="150" TextWrapping="WrapWithOverflow"/>
+                                <TextBox x:Name="NumerKol" FontWeight="Bold" Text="" PreviewTextInput="TextBox_PreviewTextInput" VerticalAlignment="Center" Margin="20 5 0 0" Width="150" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Row="7">
+                                <CheckBox x:Name="naglowki"  Content="Czy tabela zawiera nagłówki?" FontWeight="Bold" Margin="20 0 0 0" IsChecked="True"/>
+                                <Button x:Name="Check_btn" Margin="20 10 20 5" Height="25" Content="Check" Background="#004c4c" Foreground="White" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" Click="Check_btn_Click"/>
+                                <TextBlock x:Name="ErrorMessage_text" Text="" FontSize="13" Foreground="Red" FontWeight="ExtraBlack" TextAlignment="Center" Width="240" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                            
+                        </Grid>
+                    </Border>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <Grid Grid.Column="1">
+                        <StackPanel Margin="10" Orientation="Horizontal"  HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Button x:Name="Minimalize" Grid.Column="1" Background="Transparent" Margin="0" Height="22" Width="22" Click="Minimalize_Click"  BorderThickness="0">
+                                <Ellipse 
+            Width="20"
+            Height="20"
+            Fill="#006666"
+            Canvas.Left="135"
+            Canvas.Top="25"/>
+                            </Button>
+                            <Button x:Name="Close" Grid.Column="2" Background="Transparent"  Margin="0" Height="22" Width="22" Click="Close_Click" BorderThickness="0">
+                                <Ellipse
+             Width="20"
+             Height="20"
+             Fill="Red"
+             Canvas.Left="135"
+             Canvas.Top="25"/>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Text="Osoby które mają urodziny podczas wyjazdu:" Margin="100 15 20 20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ScrollViewer Height="400" VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="urodziny_text" Text="" Margin="100 0 20 20" Width="350" TextWrapping="Wrap"/>
+                        </ScrollViewer>
+                        
+
+                    </Grid>
+                    
+                </Grid>
+                
+            </StackPanel>
+            
+        </Grid>
+    </Border>
+</Window>
